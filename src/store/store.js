@@ -6,3 +6,5 @@ export const store = configureStore({
     data: ticketsDataReducer,
   },
 });
+
+//create store for data reducer
