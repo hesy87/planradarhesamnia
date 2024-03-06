@@ -5,6 +5,10 @@ const Card = ({...items}) => {
   return (
     <div className="border-2 w-100 bg-base-100 shadow-sm rounded-2xl flex flex-row justify-around py-3 mt-1">
       <div>
+        <label className="pb-1">Ticket No</label>
+        <p>{items.id}</p>
+      </div>
+      <div>
         <label className="pb-1">Subject</label>
         <p>{items.subject}</p>
       </div>

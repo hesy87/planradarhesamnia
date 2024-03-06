@@ -1,26 +1,48 @@
 import { useSelector } from "react-redux";
-import './tableList.scss'
+import { useState } from "react";
 import Card from "../UI/Card";
-// import Virtualize from "../../virualize/Virtualize";
 
-const TicketLits = () => {
-    const ticketsData = useSelector((state) => state.data.items);
-    console.log(ticketsData);
+const TicketList = () => {
+  const ticketsData = useSelector((state) => state.data.items);
+  const [scrollTop, setScrollTop] = useState(0);
+  const itemHeight = 80; // Define or import itemHeight
+  const containerHeight = 500; // Define or fetch containerHeight
+  const startIndex = Math.floor(scrollTop / itemHeight);
+  const endIndex = Math.min(
+    startIndex + Math.ceil(containerHeight / itemHeight),
+    ticketsData.length
+  );
+  const visibleItems = ticketsData.slice(startIndex, endIndex);
+  const invisibleItemsHeight =
+    (startIndex + visibleItems.length - endIndex) * itemHeight;
+
+  const handleScroll = (event) => {
+    setScrollTop(event.target.scrollTop);
+  };
+
   return (
-    <div className="container">
-      {/* create Data table */}
-      <div className="innerContainer">
-        {ticketsData.map((items) => <Card key={items.id} {...items} />)}
+    <div
+      style={{ height: `${containerHeight}px`, overflowY: "scroll" }}
+      onScroll={handleScroll}
+    >
+      <div style={{ height: `${ticketsData.length * itemHeight}px` }}>
+        <div
+          style={{
+            position: "relative",
+            height: `${visibleItems.length * itemHeight}px`,
+            top: `${startIndex * itemHeight}px`,
+          }}
+        >
+          {visibleItems.map((item) => (
+            <div key={item.id} style={{ height: `${itemHeight}px` }}>
+              <Card {...item} />
+            </div>
+          ))}
+        </div>
+        <div style={{ height: `${invisibleItemsHeight}px` }} />
       </div>
-      {/* <div className="innerContainer">
-        <Virtualize
-          ticketsData={ticketsData}
-          component={Table}
-          gap={4}
-        />
-      </div> */}
     </div>
   );
 };
 
-export default TicketLits;
+export default TicketList;
