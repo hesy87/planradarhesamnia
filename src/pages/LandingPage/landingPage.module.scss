@@ -1,0 +1,18 @@
+@import '/src/index.scss';
+
+.bgColor {
+  background-color: $background_color;
+}
+.customButton {
+  background-color: $success_color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($success_color, 10%);
+  }
+}
