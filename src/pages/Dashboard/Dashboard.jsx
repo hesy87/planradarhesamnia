@@ -1,7 +1,9 @@
+import TicketLits from "../../components/TicketLits";
+import style from "./dashboard.module.scss";
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className={`${style.bgColor} h-svh`}><TicketLits/></div>
   )
 }
 
