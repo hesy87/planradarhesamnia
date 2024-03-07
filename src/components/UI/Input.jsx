@@ -1,7 +1,6 @@
-const Input = ({ placeholder, register, value }) => {
+const Input = ({ placeholder, register }) => {
   return (
     <input
-      value={value}
       type="text"
       placeholder={placeholder}
       className="input input-bordered w-full max-w-xs mt-2"

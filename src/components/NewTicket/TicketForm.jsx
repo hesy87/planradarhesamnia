@@ -8,10 +8,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTicket, updateTicket } from "../../store/dataSlice";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TicketForm = () => {
       const {
       control,
+      setValue,
       register,
       handleSubmit,
       formState: { errors, isSubmitting, isSubmitSuccessful },
@@ -21,6 +23,7 @@ const TicketForm = () => {
     });
    
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const selectedTicket = useSelector((state) => state.data.selectedTicket);
   
@@ -29,15 +32,17 @@ const TicketForm = () => {
    useEffect(() => {
      if (isSubmitSuccessful) {
        reset();
+       navigate('/dashboard')
      }
    }, [isSubmitSuccessful, reset]);
   
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(data);
     if (selectedTicket !== undefined) {
       dispatch(
         updateTicket({
-          id:id,
+          id: selectedTicket.id,
           subject: data.subject,
           status: data.status,
           priority: data.priority,
@@ -51,11 +56,29 @@ const TicketForm = () => {
       status: data.status,
       priority: data.priority,
       description: data.description,
-  })
-);
-    }
-    
+              })
+            );
+          }
   };
+
+  useEffect(() => {
+    setValue(
+      "subject",
+      selectedTicket !== undefined ? selectedTicket.subject : undefined
+    );
+    setValue(
+      "description",
+      selectedTicket !== undefined ? selectedTicket.description : undefined
+    );
+    setValue(
+      "priority",
+      selectedTicket !== undefined ? selectedTicket.priority : undefined
+    );
+    setValue(
+      "status",
+      selectedTicket !== undefined ? selectedTicket.status : undefined
+    );
+  }, [selectedTicket,setValue]);
 
   return (
     <>
@@ -74,9 +97,6 @@ const TicketForm = () => {
         <Controller
           name="priority"
           control={control}
-          defaultValue={
-            selectedTicket !== undefined ? selectedTicket.priority : undefined
-          }
           render={({ field }) => (
             <Select
               value={field.value}
@@ -92,9 +112,6 @@ const TicketForm = () => {
         <Controller
           name="status"
           control={control}
-          defaultValue={
-            selectedTicket !== undefined ? selectedTicket.status : undefined
-          }
           render={({ field }) => (
             <Select
               value={field.value}
@@ -110,11 +127,6 @@ const TicketForm = () => {
         <Input
           placeholder="Description"
           register={register("description")}
-          value={
-            selectedTicket !== undefined
-              ? selectedTicket.description
-              : undefined
-          }
         />
         <Button
           text={
