@@ -1,14 +1,18 @@
+import { deleteTicket } from "../../store/dataSlice";
 import Badge from "./Badge";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
 
-const Card = ({...items}) => {
+const Card = ({ ...items }) => {
+  const dispatch = useDispatch();
+
+  const onDelete = (itemId) => {
+    dispatch(deleteTicket(itemId));
+  }
+  
   return (
     <div className="border-2 h-full w-100 bg-base-100 shadow-sm rounded-2xl flex flex-col items-center md:flex-row p-3 mt-1">
       <div className="flex flex-row justify-between md:w-3/4">
-        {/* <div>
-          <label className="pb-1">Ticket No</label>
-          <p>{items.id}</p>
-        </div> */}
         <div>
           <label className="pb-1">Subject</label>
           <p>{items.subject}</p>
@@ -45,7 +49,7 @@ const Card = ({...items}) => {
         </div>
       </div>
       <div className="flex justify-end md:w-1/4">
-        <Button text={"Delete"} color={"btn-error"} />
+        <Button text={"Delete"} color={"btn-error"} onClick={()=>onDelete(items.id)} />
         <Button text={"Edit"} color={"btn-success"} />
       </div>
     </div>

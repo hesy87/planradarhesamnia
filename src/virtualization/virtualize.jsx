@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "../components/UI/Card";
 
 
-export default function VirtualizedList({ items, itemHeight, containerHeight }) {
+export default function VirtualizedList({ items, itemHeight, containerHeight}) {
   const [scrollTop, setScrollTop] = useState(0);
   const startIndex = Math.floor(scrollTop / itemHeight);
   const endIndex = Math.min(
