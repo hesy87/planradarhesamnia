@@ -38,7 +38,6 @@ const TicketForm = () => {
   
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
     if (selectedTicket !== undefined) {
       dispatch(
         updateTicket({

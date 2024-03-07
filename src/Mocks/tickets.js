@@ -2,7 +2,7 @@
 
 
 export let ticketsData = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 10000 ; i++) {
   let status = "";
   const randomStatus = Math.floor(Math.random() * 3) + 1;
   if (randomStatus === 1) {

@@ -1,13 +1,12 @@
 
-
-const Radial = () => {
+const Radial = ({ color, tasks }) => {
   return (
     <div
-      className="radial-progress text-primary"
-      style={{ "--value": 70 }}
+      className={`radial-progress text-[${color}] text-xl my-5`}
+      style={{ "--value": `${tasks}` }}
       role="progressbar"
     >
-      70%
+      {tasks}
     </div>
   );
 }

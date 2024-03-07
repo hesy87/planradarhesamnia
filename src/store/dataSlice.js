@@ -23,6 +23,10 @@ export const dataSlice = createSlice({
       const ticket = state.items.find((item) => item.id === action.payload);
       state.selectedTicket = ticket;
     },
+    newTicketFilter: (state) => {
+      state.newTickets = state.items.filter((item) => item.status === 'new');
+      state.items = state.newTickets
+    },
     updateTicket: (state, action) => {
       state.items = state.items.map((item) => {
         if (item.id === action.payload.id) {
@@ -40,6 +44,6 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { addTicket, deleteTicket, getOneTicket, updateTicket } =
+export const { addTicket, deleteTicket, getOneTicket, updateTicket, newTicketFilter } =
   dataSlice.actions;
 export default dataSlice.reducer;
