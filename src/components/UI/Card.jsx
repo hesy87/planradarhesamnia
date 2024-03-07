@@ -1,14 +1,20 @@
-import { deleteTicket } from "../../store/dataSlice";
+import { deleteTicket, getOneTicket } from "../../store/dataSlice";
 import Badge from "./Badge";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ ...items }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onDelete = (itemId) => {
     dispatch(deleteTicket(itemId));
   }
+  const onEdit = (itemId) => {
+    dispatch(getOneTicket(itemId));
+    navigate(`/editticket/${itemId}`);
+  };
   
   return (
     <div className="border-2 h-full w-100 bg-base-100 shadow-sm rounded-2xl flex flex-col items-center md:flex-row p-3 mt-1">
@@ -49,8 +55,16 @@ const Card = ({ ...items }) => {
         </div>
       </div>
       <div className="flex justify-end md:w-1/4">
-        <Button text={"Delete"} color={"btn-error"} onClick={()=>onDelete(items.id)} />
-        <Button text={"Edit"} color={"btn-success"} />
+        <Button
+          text={"Delete"}
+          color={"btn-error"}
+          onClick={() => onDelete(items.id)}
+        />
+        <Button
+          text={"Edit"}
+          color={"btn-success"}
+          onClick={() => onEdit(items.id)}
+        />
       </div>
     </div>
   );
