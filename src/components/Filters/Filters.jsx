@@ -15,7 +15,7 @@ const Filters = () => {
   return (
     <div className="flex items-center justify-center">
       <Button
-        color={"btn-accent w-1/12"}
+        color={"btn-accent md:w-1/12"}
         text={"Filter New Tasks"}
         onClick={onClickHandler}
       />

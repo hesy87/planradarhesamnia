@@ -24,10 +24,3 @@ react-redux // state management <br>
 react-router-dom // client side routing <br>
 
 
-<<<<<<< HEAD
-To run app -> npm run dev
-
-
-
-=======
->>>>>>> 1401aa3de9ae7214d0e8954faaeea37a73bc5380

@@ -1,7 +1,7 @@
 const Select = ({ value, onChange, fields, placeholder }) => {
   return (
     <select
-      className="select select-bordered w-full max-w-xs mt-2"
+      className="select select-bordered w-full max-w-xl mt-2"
       value={value}
       onChange={onChange}
     >

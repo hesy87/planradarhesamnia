@@ -82,7 +82,7 @@ const TicketForm = () => {
   return (
     <>
       <form
-        className="flex-col flex w-1/4 mt-5 mx-auto"
+        className="flex-col flex md:w-2/3 items-center mt-5 mx-auto"
         onSubmit={handleSubmit(onSubmit)}
       >
         {id !== undefined ? <h1>Edit Ticket</h1> : <h1>New Ticket</h1>}

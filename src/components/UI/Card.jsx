@@ -17,13 +17,13 @@ const Card = ({ ...items }) => {
   };
   
   return (
-    <div className="border-2 h-full w-100 bg-base-100 shadow-sm rounded-2xl flex flex-col items-center md:flex-row p-3 mt-1">
-      <div className="flex flex-row justify-between md:w-3/4">
-        <div>
+    <div className="border-2 h-full w-100 bg-base-100 shadow-sm rounded-2xl flex flex-col items-center md:flex-row p-3 mt-1 justify-around">
+      <div className="flex flex-row md:w-3/4 ">
+        <div className="md:w-1/5 mr-32 md:mr-0">
           <label className="pb-1">Subject</label>
           <p>{items.subject}</p>
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center md:w-1/5">
           <label className="pb-1">Status</label>
           <Badge
             status={items.status}
@@ -36,7 +36,7 @@ const Card = ({ ...items }) => {
             }
           />
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center md:w-1/5 ml-32 md:ml-0">
           <label className="pb-1">Priority</label>
           <Badge
             status={items.priority}
@@ -49,12 +49,12 @@ const Card = ({ ...items }) => {
             }
           />
         </div>
-        <div className="invisible md:visible">
+        <div className="hidden md:block w-0 md:w-full">
           <label>Descriptopn</label>
           <p>{items.description}</p>
         </div>
       </div>
-      <div className="flex justify-end md:w-1/4">
+      <div className="flex justify-end md:w-1/4 w-1/2">
         <Button
           text={"Delete"}
           color={"btn-error"}
