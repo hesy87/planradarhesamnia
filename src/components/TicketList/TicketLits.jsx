@@ -1,46 +1,40 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import Card from "../UI/Card";
+import VirtualizedList from "../../virtualization/virtualize";
+import { useEffect, useState } from "react";
 
 const TicketList = () => {
   const ticketsData = useSelector((state) => state.data.items);
-  const [scrollTop, setScrollTop] = useState(0);
-  const itemHeight = 80; // Define or import itemHeight
-  const containerHeight = 500; // Define or fetch containerHeight
-  const startIndex = Math.floor(scrollTop / itemHeight);
-  const endIndex = Math.min(
-    startIndex + Math.ceil(containerHeight / itemHeight),
-    ticketsData.length
-  );
-  const visibleItems = ticketsData.slice(startIndex, endIndex);
-  const invisibleItemsHeight =
-    (startIndex + visibleItems.length - endIndex) * itemHeight;
+  const [width, setWidth] = useState(window.innerWidth);
+  const [itemHeight, setItemHeight] = useState();
 
-  const handleScroll = (event) => {
-    setScrollTop(event.target.scrollTop);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      if (window.innerWidth <= 800) {
+        setItemHeight(200); // Define itemHeight
+      } else {
+        setItemHeight(80);
+      }
+    };
+
+    handleResize(); 
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const containerHeight = 500; // Define or fetch containerHeight
 
   return (
-    <div
-      style={{ height: `${containerHeight}px`, overflowY: "scroll" }}
-      onScroll={handleScroll}
-    >
-      <div style={{ height: `${ticketsData.length * itemHeight}px` }}>
-        <div
-          style={{
-            position: "relative",
-            height: `${visibleItems.length * itemHeight}px`,
-            top: `${startIndex * itemHeight}px`,
-          }}
-        >
-          {visibleItems.map((item) => (
-            <div key={item.id} style={{ height: `${itemHeight}px` }}>
-              <Card {...item} />
-            </div>
-          ))}
-        </div>
-        <div style={{ height: `${invisibleItemsHeight}px` }} />
-      </div>
+    <div>
+      <VirtualizedList
+        items={ticketsData}
+        itemHeight={itemHeight}
+        containerHeight={containerHeight}
+      />
     </div>
   );
 };

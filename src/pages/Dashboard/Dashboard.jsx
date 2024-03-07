@@ -1,9 +1,12 @@
-// import style from "./dashboard.module.scss";
-import TicketLits from "../../components/TicketList/TicketLits"
+import TicketLits from "../../components/TicketList/TicketLits";
+import Navbar from  "../../components/UI/Navbar.jsx"
 
 const Dashboard = () => {
   return (
-    <div><TicketLits /></div>
+    <>
+      <Navbar/>
+      <TicketLits />
+    </>
   )
 }
 
