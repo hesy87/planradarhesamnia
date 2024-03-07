@@ -1,10 +1,10 @@
-//mock data
+//mock data creation
 
 
 export let ticketsData = [];
 for (let i = 0; i < 10000 ; i++) {
   let status = "";
-  const randomStatus = Math.floor(Math.random() * 3) + 1;
+  const randomStatus = Math.floor(Math.random() * 3) + 1; //random number between  1 - 3 and make the 3 kinds of status 
   if (randomStatus === 1) {
     status = "new";
   } else if (randomStatus === 2) {
@@ -16,7 +16,7 @@ for (let i = 0; i < 10000 ; i++) {
   ticketsData.push({
     id: i,
     subject: "ticket" + i,
-    priority: Math.floor(Math.random() * 3) + 1,
+    priority: Math.floor(Math.random() * 3) + 1, //random number between  1 - 3
     status: status,
     description:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum, placeat!",

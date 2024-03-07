@@ -4,7 +4,7 @@ const Input = ({ placeholder, register }) => {
       type="text"
       placeholder={placeholder}
       className="input input-bordered w-full max-w-xl mt-2"
-      {...register}
+      {...register}  //react hook form function
     />
   );
 };

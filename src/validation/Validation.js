@@ -8,3 +8,7 @@ export const schema = z.object({
   description: z.string(),
   priority: z.number().min(1, { message: "Required" }),
 });
+
+//validate form input with zod
+//create schema and export it to form component
+//message shown below the element when data intry is wrong

@@ -12,23 +12,27 @@ import { useNavigate } from "react-router-dom";
 
 const TicketForm = () => {
       const {
-      control,
-      setValue,
-      register,
-      handleSubmit,
-      formState: { errors, isSubmitting, isSubmitSuccessful },
-      reset,
-    } = useForm({
-      resolver: zodResolver(schema),
-    });
+        control, //methods for registering components
+        setValue, //dynamically set the value of a registered field
+        register, //apply validation rules
+        handleSubmit, //receive the form data if form validation is successful.
+        formState: { errors, isSubmitting, isSubmitSuccessful }, //information about the entire form state
+        reset, //reset the forms elements
+      } = useForm({
+        resolver: zodResolver(schema), //validat input data with zod by resolver
+        //Integrates with your preferred schema validation library
+      });
    
-  const { id } = useParams();
+  const { id } = useParams(); //get id of edited ticket passed to this component 
   const navigate = useNavigate();
 
-  const selectedTicket = useSelector((state) => state.data.selectedTicket);
+  //get data of the selected ticket for editing 
+  const selectedTicket = useSelector((state) => state.data.selectedTicket); 
   
   const dispatch = useDispatch();
   
+  //this useEffect responsible for reset form after successfull submiting ensure by react hook form
+  //after sumbit navigate to dashboard
    useEffect(() => {
      if (isSubmitSuccessful) {
        reset();
@@ -36,6 +40,10 @@ const TicketForm = () => {
      }
    }, [isSubmitSuccessful, reset]);
   
+  
+  //time out just a waiting time for showing the progress in button
+  //if we are in editing view pass state to update reducer
+  //if we are in new ticket view pass state to add ticket reducer
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (selectedTicket !== undefined) {
@@ -60,6 +68,9 @@ const TicketForm = () => {
           }
   };
 
+
+  //setValue responsible for pass state to react hook form element in editing view
+  //after editing and navigate to another page state remove from the elements 
   useEffect(() => {
     setValue(
       "subject",
@@ -85,10 +96,11 @@ const TicketForm = () => {
         className="flex-col flex md:w-2/3 items-center mt-5 mx-auto"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {id !== undefined ? <h1>Edit Ticket</h1> : <h1>New Ticket</h1>}
+        {/* header text base on the view page edit or new  */}
+        {id !== undefined ? <h1>Edit Ticket</h1> : <h1>New Ticket</h1>} 
         <Input
           placeholder={"Subject"}
-          register={register("subject")}
+          register={register("subject")} 
         />
         {errors.subject && (
           <div className="text-blue-500">{errors.subject.message}</div>

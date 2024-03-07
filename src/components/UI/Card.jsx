@@ -8,14 +8,17 @@ const Card = ({ ...items }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //execute delete ticket reducer
   const onDelete = (itemId) => {
     dispatch(deleteTicket(itemId));
-  }
+  };
+
+  //execute get one ticket reducer and pass item id as state param to new ticket component to handle edit
   const onEdit = (itemId) => {
     dispatch(getOneTicket(itemId));
     navigate(`/editticket/${itemId}`);
   };
-  
+
   return (
     <div className="border-2 h-full w-100 bg-base-100 shadow-sm rounded-2xl flex flex-col items-center md:flex-row p-3 mt-1 justify-around">
       <div className="flex flex-row md:w-3/4 ">

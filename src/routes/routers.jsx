@@ -18,6 +18,7 @@ const Routers = () => {
         path: "/newticket",
         element: <NewTicket />,
       },
+      // pass id of each tickets to handle edit form 
       {
         path: "/editticket/:id",
         element: <NewTicket />,

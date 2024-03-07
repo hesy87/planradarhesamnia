@@ -4,21 +4,19 @@ import { useEffect, useState } from "react";
 
 const TicketList = () => {
   const ticketsData = useSelector((state) => state.data.items);
-  const [width, setWidth] = useState(window.innerWidth);
   const [itemHeight, setItemHeight] = useState();
 
   useEffect(() => {
     const handleResize = () => {
-      setWidth(window.innerWidth);
       if (window.innerWidth <= 800) {
-        setItemHeight(200); // Define itemHeight
+        setItemHeight(200); // Define Height for mobile and tablet screen size
       } else {
-        setItemHeight(80);
+        setItemHeight(80); // Define Height for Desktop screen size
       }
     };
 
     handleResize(); 
-
+    // evet listener to find out the size of the screen to handle responsive designe
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -26,8 +24,9 @@ const TicketList = () => {
     };
   }, []);
 
-  const containerHeight = 500; // Define or fetch containerHeight
+  const containerHeight = 500; // Define Height of the container of virtual list
 
+  // past array of data and sizes to virtualition
   return (
     <div>
       <VirtualizedList
