@@ -2,6 +2,9 @@
 PlanRadar SaaS application
 
 ### Demo
+```bash
+https://uupload.ir/view/planradar_l7r2.mp4/
+```
 
 ### Setup
 ```bash

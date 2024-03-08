@@ -18,7 +18,7 @@ const Filters = () => {
     <div className="flex items-center justify-center">
       <Button
         color={"btn-accent md:w-1/12"}
-        text={"Filter New Tasks"}
+        text={"Filter New Tickets"}
         onClick={onClickHandler}
       />
       <Radial
