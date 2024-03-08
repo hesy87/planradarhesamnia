@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "../../validation/Validation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTicket, updateTicket } from "../../store/dataSlice";
+import { addTicket, getOneTicket, updateTicket } from "../../store/dataSlice";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -33,10 +33,12 @@ const TicketForm = () => {
   
   //this useEffect responsible for reset form after successfull submiting ensure by react hook form
   //after sumbit navigate to dashboard
+  //clear state
    useEffect(() => {
      if (isSubmitSuccessful) {
        reset();
        navigate('/dashboard')
+       dispatch(getOneTicket());
      }
    }, [isSubmitSuccessful, reset]);
   
