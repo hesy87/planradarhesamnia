@@ -8,11 +8,13 @@ https://uupload.ir/view/planradar_l7r2.mp4/
 
 ### Setup
 ```bash
-npm run dev
-```
-```bash
 https://github.com/hesy87/planradarhesamnia.git
 ```
+```bash
+npm install
+npm run dev
+```
+
 
 ### Technologies
 tailwindcss // A utility-first CSS framework <br>
